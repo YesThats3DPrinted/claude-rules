@@ -178,3 +178,35 @@ It must cover:
 Why: without one, every new screen invents its own colours, gaps and corners, and the app ends up a mess. Set these once and build everything from them.
 
 **Never type a raw colour, text size, gap, corner or shadow straight into a component when a named one already exists. Always use the name.** Need a value that has no name yet? Don't invent one and don't hardcode it. Ask me.
+
+---
+
+## 12. Changing code? Take your own copy, and finish by putting it back
+
+I often have two or three chats open at once. Two agents editing the same folder overwrite each
+other's work, and the second one usually has no idea it happened.
+
+**So before you change any code in a project I already have, make your own copy of it** — a "work
+tree", which is a second folder holding the same project on its own branch. Both chats then have
+their own files and cannot tread on each other. Claude Code makes one for you; you do not build it
+by hand.
+
+**A branch on its own is not enough.** Two chats in the same folder share the same files, so
+switching branch in one changes the files under the other mid-sentence. The separate folder is the
+part that actually protects you.
+
+**Finishing is part of the job, not an extra.** Work left in a side copy is invisible: nothing is
+broken, nothing errors, and a week later it looks like it was never done. So when the work is
+finished and tested, **merge it back into `main` and push it.** Do not leave it for me.
+
+**Three exceptions, and they matter:**
+
+- **Small, quick, and I am watching** — one obvious edit in a chat where I am replying to you. Just
+  do it.
+- **My routines push straight to `main`.** The email assistant especially: its next run only reads
+  `main`, so work on a branch would silently stop it learning. Never give a routine a branch.
+- **A project that is not in git at all.** Nothing to branch. Say so before you start changing it.
+
+The daily routine checks every morning for work sitting in a side copy that never came back, and
+tells me. If you leave something half done, say so plainly rather than letting that be how I find
+out.
