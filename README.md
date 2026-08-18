@@ -15,6 +15,7 @@ read. **Nothing secret goes in here. Ever.** No passwords, no keys, no customer 
 | `CLAUDE.md` | Adam's rules for how to work with him | every agent, at the start of a session |
 | `filing-suggestions.md` | How a routine files an improvement suggestion | the routines, before filing one |
 | `routine-reports.md` | How a routine writes its report and its summary emails | the routines, before reporting back |
+| `writing-runbooks.md` | How to write anything somebody reads later: a runbook, a recipe, a how-to page | any agent about to write one |
 
 ## The addresses to read them at
 
@@ -23,6 +24,7 @@ https://raw.githubusercontent.com/YesThats3DPrinted/claude-rules/main/kiss.md
 https://raw.githubusercontent.com/YesThats3DPrinted/claude-rules/main/CLAUDE.md
 https://raw.githubusercontent.com/YesThats3DPrinted/claude-rules/main/filing-suggestions.md
 https://raw.githubusercontent.com/YesThats3DPrinted/claude-rules/main/routine-reports.md
+https://raw.githubusercontent.com/YesThats3DPrinted/claude-rules/main/writing-runbooks.md
 ```
 
 ## Do not keep a second copy
@@ -33,8 +35,9 @@ problem this repo exists to kill.
 
 ## On Adam's Mac
 
-`~/.claude/CLAUDE.md` and `~/.claude/hooks/kiss.md` are **links** to the files in this folder, not
-copies. So editing either one here is the same as editing it there — nothing to keep in step.
+`~/.claude/CLAUDE.md`, `~/.claude/hooks/kiss.md` and
+`~/.claude/skills/writing-runbooks/SKILL.md` are **links** to the files in this folder, not
+copies. So editing one here is the same as editing it there — nothing to keep in step.
 
 After changing anything, push it, or the cloud routines carry on reading the old version:
 
