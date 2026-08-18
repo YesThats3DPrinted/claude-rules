@@ -14,6 +14,7 @@ read. **Nothing secret goes in here. Ever.** No passwords, no keys, no customer 
 | `kiss.md` | How to write to Adam: short, plain words, no filler | every agent, on every message |
 | `CLAUDE.md` | Adam's rules for how to work with him | every agent, at the start of a session |
 | `filing-suggestions.md` | How a routine files an improvement suggestion | the routines, before filing one |
+| `routine-reports.md` | How a routine writes its report and its summary emails | the routines, before reporting back |
 
 ## The addresses to read them at
 
@@ -21,6 +22,7 @@ read. **Nothing secret goes in here. Ever.** No passwords, no keys, no customer 
 https://raw.githubusercontent.com/YesThats3DPrinted/claude-rules/main/kiss.md
 https://raw.githubusercontent.com/YesThats3DPrinted/claude-rules/main/CLAUDE.md
 https://raw.githubusercontent.com/YesThats3DPrinted/claude-rules/main/filing-suggestions.md
+https://raw.githubusercontent.com/YesThats3DPrinted/claude-rules/main/routine-reports.md
 ```
 
 ## Do not keep a second copy
