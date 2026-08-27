@@ -32,6 +32,23 @@ Skip any that is empty:
 - **Anything needing Adam to act**, and exactly what the action is.
 - **Every question you need him to answer**, and what it is about.
 
+## Put a heading on every bit
+
+Whatever survives the cuts above gets a **heading**, so Adam can find the part he cares about
+without reading the rest. His rule: every bit you share should have a header so it is easier to
+read.
+
+A heading only appears when there is something under it. A run with nothing wrong has no headings
+at all, because it is one line.
+
+```
+⚠️ Could not verify
+Two US shipments have no tracking. FBA19LW0BH4K, FBA19MLF5M9L.
+
+❓ Needs you
+🇺🇸 US — WARGAMER is back on sale but the 5kg multipack is still at zero. How many?
+```
+
 **If everything worked and nothing needs him, say so in one line and stop.** For example *"All six
 duties clean, nothing to action."* That is a complete and correct report.
 
