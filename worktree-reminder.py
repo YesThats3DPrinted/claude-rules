@@ -14,7 +14,8 @@ with `sed -i`, a heredoc, or `>` went straight past it — which is exactly how 
 folder got edited again an hour after this hook was written. A command is read for the
 paths it would WRITE to; reading, searching and git commands are ignored.
 
-Speaks once per repository per session, and only when it would change something:
+Speaks once per repository per session — the copy it asks for is per session too, not per
+job — and only when it would change something:
 
 - silent inside a work tree, which is the thing it is asking for;
 - silent on a branch, since a branch means somebody already thought about it;
@@ -41,8 +42,9 @@ MESSAGE = (
     "Before editing {repo}: you are in the shared folder, on main. Another chat may be in "
     "the same one right now, and neither of you would be told. CLAUDE.md rule 12 — take "
     "this session's own copy first, and merge it back when the work is done and tested. "
-    "There is no small-edit exception. If this IS one of Adam's routines, carry on: a "
-    "routine reads main and must never be given a branch."
+    "There is no small-edit exception. ONE copy per chat, not per job — if you already made "
+    "one here, use that. If this IS one of Adam's routines, carry on: a routine reads main "
+    "and must never be given a branch."
 )
 
 
