@@ -16,6 +16,24 @@ read. **Nothing secret goes in here. Ever.** No passwords, no keys, no customer 
 | `filing-suggestions.md` | How a routine files an improvement suggestion | the routines, before filing one |
 | `routine-reports.md` | How a routine writes its report and its summary emails | the routines, before reporting back |
 | `writing-runbooks.md` | How to write anything somebody reads later: a runbook, a recipe, a how-to page | any agent about to write one |
+| `affective-ceo.md` | The writing style Adam's own chats run on | every agent, at the start of a session |
+| `worktree-reminder.py` | A hook, not a rule — see below | it runs; nobody reads it |
+
+## The one file here that is not words
+
+`worktree-reminder.py` is a **hook**: a small program Claude Code runs by itself before every edit.
+It speaks up when an edit is about to land in a shared project folder instead of in that chat's own
+copy — rule 12 — and it stays quiet everywhere else.
+
+It lives here for the same reason the rules do: **one copy, edited in one place.**
+
+- **On Adam's Mac**, `~/.claude/hooks/worktree-reminder.py` is a symlink pointing at this file, and
+  `~/.claude/settings.json` runs it before every Write and Edit.
+- **In the cloud**, a run has none of his Mac, so it downloads this file at the start of every
+  session and runs the copy it just fetched.
+
+So editing it here changes both. Do not copy it into another repo — that is the thing this
+arrangement exists to prevent.
 
 ## The addresses to read them at
 
@@ -25,6 +43,8 @@ https://raw.githubusercontent.com/YesThats3DPrinted/claude-rules/main/CLAUDE.md
 https://raw.githubusercontent.com/YesThats3DPrinted/claude-rules/main/filing-suggestions.md
 https://raw.githubusercontent.com/YesThats3DPrinted/claude-rules/main/routine-reports.md
 https://raw.githubusercontent.com/YesThats3DPrinted/claude-rules/main/writing-runbooks.md
+https://raw.githubusercontent.com/YesThats3DPrinted/claude-rules/main/affective-ceo.md
+https://raw.githubusercontent.com/YesThats3DPrinted/claude-rules/main/worktree-reminder.py
 ```
 
 ## Do not keep a second copy
