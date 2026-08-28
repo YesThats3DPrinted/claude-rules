@@ -18,6 +18,7 @@ read. **Nothing secret goes in here. Ever.** No passwords, no keys, no customer 
 | `writing-runbooks.md` | How to write anything somebody reads later: a runbook, a recipe, a how-to page | any agent about to write one |
 | `affective-ceo.md` | The writing style Adam's own chats run on | every agent, at the start of a session |
 | `worktree-reminder.py` | A hook, not a rule — see below | it runs; nobody reads it |
+| `worktree-reminder.test.sh` | Checks that hook still speaks and stays quiet in the right places | run it after changing the hook |
 
 ## The one file here that is not words
 
@@ -34,6 +35,11 @@ It lives here for the same reason the rules do: **one copy, edited in one place.
 
 So editing it here changes both. Do not copy it into another repo — that is the thing this
 arrangement exists to prevent.
+
+**After changing it, run `./worktree-reminder.test.sh`.** A hook that is too noisy gets switched
+off, and a hook that is too quiet is not there at all — and both look like success from the
+outside. The first version watched only the Write and Edit tools, so a file changed with `sed`,
+a heredoc or `>` sailed straight past it.
 
 ## The addresses to read them at
 
