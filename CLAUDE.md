@@ -216,6 +216,10 @@ this — whether somebody else might be in the same folder is, and you can never
 **Take the copy BEFORE the first edit, not once the work looks big enough.** By the time it looks
 big enough you are already several edits into somebody else's folder.
 
+A hook says this out loud before the first edit in a shared folder, once per project per chat, so
+it does not depend on anybody remembering. It stays quiet inside a work tree, on a branch, and in
+a folder that is not in git.
+
 The daily routine checks every morning for work sitting in a side copy that never came back, and
 tells me. If you leave something half done, say so plainly rather than letting that be how I find
 out.
