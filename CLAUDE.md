@@ -216,6 +216,10 @@ this — whether somebody else might be in the same folder is, and you can never
 **Take the copy BEFORE the first edit, not once the work looks big enough.** By the time it looks
 big enough you are already several edits into somebody else's folder.
 
+**One copy per chat, not one per job.** It is a place to work for the whole conversation: make it
+once, keep using it for everything you do in that project, and merge it back at the end. Making a
+fresh one for each little task is the annoying version, and it is not what this asks for.
+
 A hook says this out loud before the first edit in a shared folder, once per project per chat, so
 it does not depend on anybody remembering. It stays quiet inside a work tree, on a branch, and in
 a folder that is not in git.
