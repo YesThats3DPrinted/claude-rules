@@ -199,13 +199,22 @@ part that actually protects you.
 broken, nothing errors, and a week later it looks like it was never done. So when the work is
 finished and tested, **merge it back into `main` and push it.** Do not leave it for me.
 
-**Three exceptions, and they matter:**
+**Always. There is no "this one is small" exception.**
 
-- **Small, quick, and I am watching** — one obvious edit in a chat where I am replying to you. Just
-  do it.
+There used to be one, for a quick edit while I was watching. It was worth nothing and it cost
+something real: a whole session's work went straight into `main` because every single edit,
+one at a time, looked small enough. Meanwhile another chat was editing the same folder that
+morning. Neither of us knew. Nobody warned either of us. Size is not the thing that decides
+this — whether somebody else might be in the same folder is, and you can never tell.
+
+**Two exceptions, and only these two:**
+
 - **My routines push straight to `main`.** The email assistant especially: its next run only reads
   `main`, so work on a branch would silently stop it learning. Never give a routine a branch.
 - **A project that is not in git at all.** Nothing to branch. Say so before you start changing it.
+
+**Take the copy BEFORE the first edit, not once the work looks big enough.** By the time it looks
+big enough you are already several edits into somebody else's folder.
 
 The daily routine checks every morning for work sitting in a side copy that never came back, and
 tells me. If you leave something half done, say so plainly rather than letting that be how I find
