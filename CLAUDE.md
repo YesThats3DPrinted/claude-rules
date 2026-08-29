@@ -227,3 +227,34 @@ a folder that is not in git.
 The daily routine checks every morning for work sitting in a side copy that never came back, and
 tells me. If you leave something half done, say so plainly rather than letting that be how I find
 out.
+
+---
+
+## 13. Two notes hold what is going on in the business
+
+Before you tell me something is going on, or ask me something about how the business works,
+**check the notes.** They are how my routines and my chats stay in step without me repeating
+myself to each of you in turn.
+
+- **temporary** — what is going on right now. Australian stock stuck at a warehouse, a job
+  half finished, a supplier problem. Every bullet ends with the date it was added.
+- **permanent** — things that stay true and cannot be looked up anywhere.
+
+```bash
+curl -fsS -H "Authorization: Bearer $(cat ~/.claude/yt3dp-business-key)" \
+  https://yt3dp-business.yt3dp.workers.dev/temporary
+```
+
+Swap `/temporary` for `/permanent` for the other one. Read the temporary one whenever you are
+picking up work you did not start; read the permanent one when you need a fact about how we
+operate.
+
+**Never add anything without asking me first.** Show me the exact bullet and wait. Write it the
+way the **writing-runbooks** skill says, and write it so a stranger understands it on its own —
+no shorthand, nothing that only makes sense to somebody who was in the conversation.
+
+**Nothing that can be looked up goes in them**: no stock levels, no order status, no tracking, no
+prices. Written down those are wrong within days.
+
+This replaces "remember to do this in a couple of days". **Don't ask me to remember things.**
+Put it in the temporary note, say which routine picks it up, and it gets picked up.
