@@ -19,27 +19,42 @@ read. **Nothing secret goes in here. Ever.** No passwords, no keys, no customer 
 | `affective-ceo.md` | The writing style Adam's own chats run on | every agent, at the start of a session |
 | `worktree-reminder.py` | A hook, not a rule — see below | it runs; nobody reads it |
 | `worktree-reminder.test.sh` | Checks that hook still speaks and stays quiet in the right places | run it after changing the hook |
+| `writing-runbooks-reminder.py` | A hook, not a rule — see below | it runs; nobody reads it |
+| `writing-runbooks-reminder.test.sh` | Checks that hook still speaks and stays quiet in the right places | run it after changing the hook |
 
-## The one file here that is not words
+## The files here that are not words
 
-`worktree-reminder.py` is a **hook**: a small program Claude Code runs by itself before every edit.
-It speaks up when an edit is about to land in a shared project folder instead of in that chat's own
-copy — rule 12 — and it stays quiet everywhere else.
+Two of these are **hooks**: small programs Claude Code runs by itself before every edit.
 
-It lives here for the same reason the rules do: **one copy, edited in one place.**
+- `worktree-reminder.py` speaks up when an edit is about to land in a shared project folder
+  instead of in that chat's own copy — rule 12.
+- `writing-runbooks-reminder.py` speaks up when what is being written is a page somebody reads
+  later, and says to load the `writing-runbooks` skill first.
 
-- **On Adam's Mac**, `~/.claude/hooks/worktree-reminder.py` is a symlink pointing at this file, and
-  `~/.claude/settings.json` runs it before every Write and Edit.
-- **In the cloud**, a run has none of his Mac, so it downloads this file at the start of every
-  session and runs the copy it just fetched.
+Both stay quiet everywhere else.
 
-So editing it here changes both. Do not copy it into another repo — that is the thing this
-arrangement exists to prevent.
+They live here for the same reason the rules do: **one copy, edited in one place.**
 
-**After changing it, run `./worktree-reminder.test.sh`.** A hook that is too noisy gets switched
-off, and a hook that is too quiet is not there at all — and both look like success from the
-outside. The first version watched only the Write and Edit tools, so a file changed with `sed`,
-a heredoc or `>` sailed straight past it.
+- **On Adam's Mac**, each one has a symlink in `~/.claude/hooks/` pointing at this file, and
+  `~/.claude/settings.json` runs it before every Write, Edit and Bash.
+- **In the cloud**, a run has none of his Mac, so it downloads these files at the start of every
+  session and runs the copies it just fetched.
+
+So editing one here changes both places. Do not copy either into another repo — that is the thing
+this arrangement exists to prevent.
+
+**After changing a hook, run its test script.** A hook that is too noisy gets switched off, and a
+hook that is too quiet is not there at all — and both look like success from the outside.
+
+Two things both hooks had to learn the hard way, so do not undo either:
+
+- **A file is often changed with Bash**, not with the Write or Edit tool. Watching only those two
+  tools lets `sed`, a heredoc and `>` sail straight past.
+- **A path after `cd` has no folder in it.** `cd <folder> && sed -i '' page.md` names the page
+  alone, so the folder has to be put back on before you can tell where it lands.
+
+`writing-runbooks-reminder.py` also reads **what is being written**, not only the file's name. A
+page inside a skill folder can be called anything, so a name-only check misses most of them.
 
 ## The addresses to read them at
 
