@@ -111,6 +111,11 @@ say speaks "a script that rewrites a runbook"  "{\"session_id\":\"SESSION\",\"to
 say quiet  "a script that only reads one"      "{\"session_id\":\"SESSION\",\"tool_name\":\"Bash\",\"tool_input\":{\"command\":\"python3 $PROBE/reads.py\"}}"
 say quiet  "a script that rewrites code"       "{\"session_id\":\"SESSION\",\"tool_name\":\"Bash\",\"tool_input\":{\"command\":\"python3 $PROBE/writes_code.py\"}}"
 say quiet  "a script that is not there"        '{"session_id":"SESSION","tool_name":"Bash","tool_input":{"command":"python3 /nowhere/gone.py"}}'
+# A test suite is full of made-up page names. Reading it would fire on every test run.
+cp "$PROBE/writes.py" "$PROBE/test_writes.py"
+cp "$PROBE/writes.py" "$PROBE/writes.test.py"
+say quiet  "a test suite that names pages"     "{\"session_id\":\"SESSION\",\"tool_name\":\"Bash\",\"tool_input\":{\"command\":\"python3 $PROBE/test_writes.py\"}}"
+say quiet  "a test named the other way round"  "{\"session_id\":\"SESSION\",\"tool_name\":\"Bash\",\"tool_input\":{\"command\":\"python3 $PROBE/writes.test.py\"}}"
 # The same text, typed straight into the command instead of saved in a file.
 say speaks "a heredoc that rewrites a runbook" '{"session_id":"SESSION","tool_name":"Bash","tool_input":{"command":"python3 - <<PY\nimport pathlib\npathlib.Path(\"docs/how-it-works.md\").write_text(t)\nPY"}}'
 rm -rf "$PROBE"

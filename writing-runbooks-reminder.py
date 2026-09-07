@@ -177,12 +177,17 @@ PAGE_IN_TEXT = re.compile(
 # bash command would slow every command down for nothing.
 MAX_SCRIPT_BYTES = 200_000
 
+# A test never edits a real page — it feeds made-up ones to something and checks the
+# answer. Reading its text would fire this hook every time somebody runs their own tests,
+# and a hook that cries wolf on its own test suite is a hook people switch off.
+IS_A_TEST = re.compile(r"(?:^|[./])(?:test_[^/]*|[^/]*[._]test)\.[A-Za-z0-9]+$")
+
 
 def script_text(command: str) -> str:
     """The command itself, plus the contents of any script file it runs."""
     texts = [command]
     for token in re.findall(r"[A-Za-z0-9_./~-]+", command):
-        if not token.endswith(SCRIPT_SUFFIXES):
+        if not token.endswith(SCRIPT_SUFFIXES) or IS_A_TEST.search(token):
             continue
         path = os.path.expanduser(token)
         try:
