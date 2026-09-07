@@ -91,6 +91,31 @@ say quiet  "cd into a skill, then grep"   '{"session_id":"SESSION","tool_name":"
 say quiet  "cd into code, then sed"       '{"session_id":"SESSION","tool_name":"Bash","tool_input":{"command":"cd /p/scripts && sed -i '"''"' 5d main.py"}}'
 
 echo
+echo "A script the command runs — the page is named inside the SCRIPT, not the command"
+# These need real files, because the hook opens the script to see what it would write.
+PROBE="$(mktemp -d)"
+cat > "$PROBE/writes.py" <<'PY'
+import pathlib
+p = pathlib.Path("scheduled-tasks/x/agents/stock-agent.md")
+p.write_text(p.read_text().replace("old", "new"))
+PY
+cat > "$PROBE/reads.py" <<'PY'
+import pathlib
+print(pathlib.Path("scheduled-tasks/x/agents/stock-agent.md").read_text())
+PY
+cat > "$PROBE/writes_code.py" <<'PY'
+import pathlib
+pathlib.Path("scripts/main.py").write_text("x = 1\n")
+PY
+say speaks "a script that rewrites a runbook"  "{\"session_id\":\"SESSION\",\"tool_name\":\"Bash\",\"tool_input\":{\"command\":\"python3 $PROBE/writes.py\"}}"
+say quiet  "a script that only reads one"      "{\"session_id\":\"SESSION\",\"tool_name\":\"Bash\",\"tool_input\":{\"command\":\"python3 $PROBE/reads.py\"}}"
+say quiet  "a script that rewrites code"       "{\"session_id\":\"SESSION\",\"tool_name\":\"Bash\",\"tool_input\":{\"command\":\"python3 $PROBE/writes_code.py\"}}"
+say quiet  "a script that is not there"        '{"session_id":"SESSION","tool_name":"Bash","tool_input":{"command":"python3 /nowhere/gone.py"}}'
+# The same text, typed straight into the command instead of saved in a file.
+say speaks "a heredoc that rewrites a runbook" '{"session_id":"SESSION","tool_name":"Bash","tool_input":{"command":"python3 - <<PY\nimport pathlib\npathlib.Path(\"docs/how-it-works.md\").write_text(t)\nPY"}}'
+rm -rf "$PROBE"
+
+echo
 echo "Never speaks twice about the same file"
 FIXED='{"session_id":"same-session","tool_name":"Write","tool_input":{"file_path":"/p/docs/twice.md","content":"x"}}'
 rm -f "$TMPDIR"claude-runbook-reminder-* 2>/dev/null

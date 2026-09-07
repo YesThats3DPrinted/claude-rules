@@ -22,6 +22,12 @@ or a heredoc invisible, and that is a normal way to edit. A command is read for 
 it would WRITE to; reading, searching and git are ignored. The path-reading is borrowed
 from `worktree-reminder.py` so there is one copy of it, not two.
 
+**A script the command RUNS counts too, and this is the quiet one.** `python3 patch.py`
+names no page at all — the page it rewrites is a string inside `patch.py`. Reading only
+the command means a whole runbook can be rewritten in silence, which is exactly what
+happened. So the script's own text is opened and read as well, and a heredoc's text is
+read the same way, because it is sitting in the command already.
+
 Speaks once per file per session; a second edit to the same file stays quiet.
 
 **After changing this, run `./writing-runbooks-reminder.test.sh`.** A hook that is too
@@ -113,10 +119,17 @@ def could_be_a_page(path: str) -> bool:
 
 
 def in_a_watched_place(path: str) -> bool:
-    """The name or the folder alone is enough, whatever the writing says."""
+    """The name or the folder alone is enough, whatever the writing says.
+
+    A path written inside a script usually starts AT the folder — `docs/how.md`, with no
+    slash in front — so the folder is checked at the start as well as in the middle. Miss
+    that and every path a script names reads as an ordinary file.
+    """
     if os.path.basename(path) in WATCHED_NAMES:
         return True
-    return could_be_a_page(path) and any(d in path for d in WATCHED_DIRS)
+    if not could_be_a_page(path):
+        return False
+    return any(d in path or path.startswith(d.lstrip("/")) for d in WATCHED_DIRS)
 
 
 def bash_targets(command: str) -> list:
@@ -147,6 +160,52 @@ def bash_targets(command: str) -> list:
     return out
 
 
+# Endings that hold a script somebody runs from a command.
+SCRIPT_SUFFIXES = (".py", ".sh", ".mjs", ".js", ".rb", ".pl")
+
+# Putting something INTO a file. Without one of these the text is only reading pages, and
+# a reminder about writing would be noise — and a hook that is noise gets switched off.
+PUTS_IT_IN = re.compile(
+    r"write_text\s*\(|\.write\s*\(|open\s*\([^)]{0,120}['\"][wax]"
+    r"|json\.dump\s*\(|yaml\.dump\s*\(|writeFileSync|sed\s+-i|\btee\b")
+
+# A page named inside that text. Quotes are optional, so a bare shell path is caught too.
+PAGE_IN_TEXT = re.compile(
+    r"[A-Za-z0-9_./~-]+(?:" + "|".join(re.escape(s) for s in PAGE_SUFFIXES) + r")\b")
+
+# A script bigger than this is not a small edit script, and opening one on every single
+# bash command would slow every command down for nothing.
+MAX_SCRIPT_BYTES = 200_000
+
+
+def script_text(command: str) -> str:
+    """The command itself, plus the contents of any script file it runs."""
+    texts = [command]
+    for token in re.findall(r"[A-Za-z0-9_./~-]+", command):
+        if not token.endswith(SCRIPT_SUFFIXES):
+            continue
+        path = os.path.expanduser(token)
+        try:
+            if os.path.isfile(path) and os.path.getsize(path) <= MAX_SCRIPT_BYTES:
+                with open(path, encoding="utf-8", errors="replace") as fh:
+                    texts.append(fh.read())
+        except OSError:
+            pass  # unreadable is not a reason to fail somebody's edit
+    return "\n".join(texts)
+
+
+def embedded_targets(command: str) -> list:
+    """Pages named inside a script the command runs, or inside a heredoc.
+
+    Only when that text also puts something into a file. A script that merely READS a
+    runbook is not writing one.
+    """
+    text = script_text(command)
+    if not PUTS_IT_IN.search(text):
+        return []
+    return [m.group(0) for m in PAGE_IN_TEXT.finditer(text)]
+
+
 def spoken_already(session: str, path: str) -> bool:
     """One reminder per file per session. Sets the mark as it checks."""
     key = hashlib.sha256(f"{session}|{path}".encode()).hexdigest()[:20]
@@ -170,9 +229,10 @@ def main() -> int:
     tool_input = payload.get("tool_input") or {}
 
     if tool == "Bash":
-        # No content to read — a heredoc's text is buried in the command — so a Bash write
-        # is judged on where it lands.
-        paths = [p for p in bash_targets(tool_input.get("command") or "")
+        # Judged on where it lands, from two readings: what the command itself writes to,
+        # and what a script it runs writes to. There is no single "content" to weigh.
+        command = tool_input.get("command") or ""
+        paths = [p for p in bash_targets(command) + embedded_targets(command)
                  if in_a_watched_place(p)]
         path, text = (paths[0] if paths else ""), ""
     else:
