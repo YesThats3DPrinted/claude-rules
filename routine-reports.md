@@ -23,8 +23,18 @@ routine that stops checking because it stopped reporting has broken itself.
 
 Skip any that is empty:
 
-- **Anything that failed, was skipped, or came back empty.** Name it and say why. A duty that
-  returned nothing has **failed** — say so plainly, never write it up as clean.
+- **Anything that failed or was skipped.** Name it and say why, plainly. Never write a duty that
+  broke up as clean.
+
+  ⚠ **"It broke" and "it ran and found nothing" are different things, and only the first gets a
+  line.** An empty inbox, a spam sheet with no rows, a search with no hits — those are the normal
+  answer most days, and the duty worked. Writing them up produces a paragraph about nothing, every
+  day, which is exactly what stops the report being read.
+
+  The test is whether the duty got an answer. **It got one and the answer was "nothing" → no
+  line.** **It could not get one — a command errored, a page would not load, an agent sent back no
+  receipt → that is a failure and it gets a line**, because from the outside it looks identical to
+  a quiet day and would hide itself forever.
 - **Anything you could not verify**, with enough for Adam to look himself: the full address, the
   order number, whatever he would need.
 - **Anomalies.** Something structurally wrong, a changed heading, a check that disagrees with
