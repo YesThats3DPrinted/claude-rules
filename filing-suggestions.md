@@ -53,6 +53,7 @@ whenever he likes.
 | --- | --- |
 | where the suggestion text goes | The **title** column. A database has exactly one, so it is never ambiguous. |
 | which routine it is about | The **pick-list** whose choices include your routine's name. Pick that choice exactly as written. |
+| the done tickbox | The **only tickbox** on the database. Find more than one? Tick nothing, and say so in your report. |
 
 **Never add a new choice** to the pick-list. A new choice files your suggestion under a name
 belonging to nobody.
