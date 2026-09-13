@@ -71,8 +71,21 @@ is the thing that makes a report feel like work.
 
 The same goes for an email the routine sends: group by the problem, not by the item.
 
+## No phone notifications. Not ever, from any routine.
+
+⛔ **A routine never sends Adam a phone notification.** No `PushNotification`, for anything, not
+even something urgent, not even a routine stuck behind a sign-in that only he can clear.
+
+**Why:** a notification says the same thing the report is about to say, so he reads it twice and
+neither one is where he acts. Something worth telling him goes in the report, which is the one
+place he actually reads and can act from.
+
+**This overrides any runbook that still permits one.** Found a page saying a notification is
+allowed in some case? That page is out of date. Put it in the report and say so in your
+suggestions so the page gets fixed.
+
 ## Never guess how to reach him
 
 A report is not a substitute for an escalation the runbook asks for, and an escalation is not a
-substitute for the report. Do both, as written. Never reach for a phone notification or a question
-prompt in place of the harder thing the runbook told you to do.
+substitute for the report. Do both, as written. Never reach for a question prompt in place of the
+harder thing the runbook told you to do.
