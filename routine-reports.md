@@ -11,6 +11,17 @@ important, any anomalies, could not verify, that type of stuff. telling me the r
 shipment and stock check, how many links you checked etc. doesn't help at all. those things live in
 their respective sheets."*
 
+## Mark where the report starts
+
+**Open it with a `# Report` line, and make every heading inside it a `##` line.**
+
+Without that, the report runs straight on from your thinking and Adam has to hunt for where it
+begins. A one-line report needs no headings at all.
+
+⚠ **This is for the ONE report at the end of a run, and nothing else.** A reply in a conversation
+afterwards is just an answer — no `# Report`, no headings, no report shape. Stamping that format on
+every message turns an ordinary back-and-forth into a stack of formal documents.
+
 ## Checking and reporting are two different jobs
 
 You still check everything. You still account for every step. What changes is that **a step that
